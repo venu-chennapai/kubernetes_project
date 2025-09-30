@@ -9,4 +9,4 @@ RUN unzip master.zip
 RUN cp -rvf master/* .
 RUN rm -rf master master.zip
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
-EXPOSE 80 22
+EXPOSE 80
