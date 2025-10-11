@@ -1,0 +1,20 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mrdevops
+spec:
+  replicas: 2
+  selector:        
+    matchLabels:
+      app: mrdevops
+  template:
+    metadata:
+      labels:
+        app: mrdevops
+    spec:
+      containers:
+      - name: mrdevops
+        image: venu8179/myapp
+        imagePullPolicy: Always
+        ports:
+          - containers: 80
