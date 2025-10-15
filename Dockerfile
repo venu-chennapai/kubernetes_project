@@ -1,11 +1,11 @@
-FROM quay.io/centos/centos:stream8
+FROM ubuntu:22.04
 LABEL maintainer="venuch8179@gmail.com"
 
-RUN yum install -y httpd git
+RUN apt-get update && apt-get install -y apache2 git
 WORKDIR /var/www/html
 
 RUN git clone https://github.com/themewagon/photogenic.git
 RUN cp -rvf photogenic/* . && rm -rf photogenic
 
 EXPOSE 80
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+CMD ["apachectl", "-D", "FOREGROUND"]
