@@ -1,11 +1,14 @@
-FROM ubuntu:22.04
-LABEL maintainer="venuch8179@gmail.com"
+# Use official NGINX image
+FROM nginx:latest
 
-RUN apt-get update && apt-get install -y apache2 git
-WORKDIR /var/www/html
+# Remove default NGINX static content
+RUN rm -rf /usr/share/nginx/html/*
 
-RUN git clone https://github.com/themewagon/photogenic.git
-RUN cp -rvf photogenic/* . && rm -rf photogenic
+# Copy your website files into container
+COPY ./index.html /usr/share/nginx/html/
 
+# Expose port 80 for web traffic
 EXPOSE 80
-CMD ["apachectl", "-D", "FOREGROUND"]
+
+# Start NGINX
+CMD ["nginx", "-g", "daemon off;"]
